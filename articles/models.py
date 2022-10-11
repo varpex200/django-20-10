@@ -11,7 +11,7 @@ class BaseModel(models.Model):
 # Create your models here.
 class Article(BaseModel):
     title = models.CharField(max_length=128, verbose_name='عنوان')
-    thumbnail = models.ImageField(upload_to='article-thumbnails', blank=True, default='')
+    thumbnail = models.ImageField(upload_to='article-thumbnails', blank=True, default='', verbose_name='تصویر')
     description = models.TextField(verbose_name='توضیحات')
     is_active = models.BooleanField(default=False, verbose_name='فعال')
     related_user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر مربوطه')

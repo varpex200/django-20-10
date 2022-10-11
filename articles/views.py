@@ -23,8 +23,15 @@ def index(request):
 
 def detail(request, id):
     article = Article.objects.get(id=id)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ArticleForm(instance=article)
     context = {
-        'article': article
+        'article': article,
+        'form': form
     }
     return render(request, 'retrieve.html', context)
 
