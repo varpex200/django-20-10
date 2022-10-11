@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+<h1>{{article.title}}</h1>
+<p>{{article.description}}</p>
+
+<h2>Comments:</h2>
+{% for comment in article.comment_set.all %}
+    <div>
+        <h2>{{comment.related_user.first_name}} {{comment.related_user.last_name}}</h2>
+        <p>{{comment.content}}</p>
+    </div>
+{% endfor %}
+{% endblock content %}

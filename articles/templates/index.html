@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Title For Index Page
+{% endblock %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Submit">
+</form>
+
+{% for article in articles %}
+<a href="{% url 'retrieve' id=article.id %}">
+    {% if article.thumbnail %}
+    <img width="200" src="{{article.thumbnail.url}}">
+    {% endif %}
+    <h2>{{article.title}}</h2>
+</a>
+{% endfor %}
+{% endblock content %}
