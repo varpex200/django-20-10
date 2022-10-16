@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http.response import HttpResponse
 
-from articles.forms import ArticleForm
+from articles.forms import ArticleForm, CommentForm
 from .models import Article
 from django.contrib.auth.models import User
 
@@ -24,11 +24,11 @@ def index(request):
 def detail(request, id):
     article = Article.objects.get(id=id)
     if request.method == 'POST':
-        form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
+        form = CommentForm(request.POST or None)
         if form.is_valid():
             form.save()
     else:
-        form = ArticleForm(instance=article)
+        form = CommentForm()
     context = {
         'article': article,
         'form': form
