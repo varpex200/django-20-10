@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
-
+from django.contrib.auth import authenticate, login as auth_login
 from articles.forms import ArticleForm, CommentForm
 from .models import Article
 from django.contrib.auth.models import User
@@ -37,3 +37,13 @@ def detail(request, id):
 
 def about(request):
     return render(request, 'about.html')
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('/')
+    return render(request, 'login.html')
