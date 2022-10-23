@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.decorators import login_required
 from articles.forms import ArticleForm, CommentForm
 from .models import Article
 from django.contrib.auth.models import User
 
-
+@login_required
 def index(request):
     user = User.objects.get(id=2)
     if request.method == 'POST':

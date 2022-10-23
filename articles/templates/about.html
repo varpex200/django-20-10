@@ -5,5 +5,10 @@ About US
 {% endblock title %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
+<h1>{{user.first_name}} {{user.last_name}}</h1>
+{% endif %}
+
 <h1>About US</h1>
 {% endblock %}

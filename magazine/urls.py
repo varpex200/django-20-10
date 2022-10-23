@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from articles.views import about, index, detail, login
 from django.conf import settings
 from django.conf.urls.static import static
@@ -10,6 +10,7 @@ urlpatterns = [
     path('about-us/', about, name='about'),
     path('articles/<int:id>/', detail, name='retrieve'),
     path('login/', login, name='Login'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', index, name='index')
 ]
 
